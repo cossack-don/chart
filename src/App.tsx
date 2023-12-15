@@ -39,7 +39,7 @@ function App() {
     const [minimalFinanceIpoteka,setMinimalFinanceIpoteka] = useState(2500000) as any //20%
     const [currentFinance,setCurrentFinance] = useState('1000000') as any //seychas $ nal
 
-    const [featureFinance,setFeatureFinance] = useState([]) as any
+    const [featureFinance] = useState([]) as any
     const [w,setW]= useState(null) as any
 
 
