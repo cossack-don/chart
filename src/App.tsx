@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
-import InputMask from "react-input-mask";
+
 
 import {
     Chart as ChartJS,
