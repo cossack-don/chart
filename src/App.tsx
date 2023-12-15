@@ -16,7 +16,7 @@ import {
 
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import faker from 'faker';
+
 
 ChartJS.register(annotationPlugin,
     CategoryScale,
@@ -51,7 +51,7 @@ let f = 200000
 
 useEffect(()=>{
 
-    featureFinance.find((el,index)=>{
+    featureFinance.find((el:any,index:any)=>{
         if(minimalFinanceIpoteka === 1000000 ) {
             setW(0)
 
