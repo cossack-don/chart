@@ -36,12 +36,12 @@ function App() {
     const labels = [ 'Январь','Фвевраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль','Август','Сентябрь','Октябрь','Ноябрь'];
 
 
-    const [criticalFinance,setCriticalFinance] = useState(2800000) //critical zone
-    const [minimalFinanceIpoteka,setMinimalFinanceIpoteka] = useState(2500000) //20%
-    const [currentFinance,setCurrentFinance] = useState('1000000') //seychas $ nal
+    const [criticalFinance,setCriticalFinance] = useState(2800000) as any //critical zone
+    const [minimalFinanceIpoteka,setMinimalFinanceIpoteka] = useState(2500000) as any //20%
+    const [currentFinance,setCurrentFinance] = useState('1000000') as any //seychas $ nal
 
     const [featureFinance,setFeatureFinance] = useState([]) as any
-    const [w,setW]= useState(null)
+    const [w,setW]= useState(null) as any
 
 
 let f = 200000
@@ -200,21 +200,21 @@ useEffect(()=>{
 
                 <div style={{flexDirection: 'column', display: 'flex'}}>
                     <p>Бюджет на сегодня - $</p>
-                    <input type="number"   value={currentFinance} onInput={(event)=> setCurrentFinance(Number(event.target.value))}/>
+                    <input type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
                     <button style={{padding:'5px'}} onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
                     <button style={{padding:'5px'}} onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
                 </div>
 
                 <div style={{flexDirection: 'column', display: 'flex'}}>
                     <p>Необходимо 20% - $</p>
-                    <input type="number"  step='500000' value={minimalFinanceIpoteka} onInput={(event)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
+                    <input type="number"  step='500000' value={minimalFinanceIpoteka} onInput={(event:any)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
                     <button style={{padding:'5px'}} onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)+500000)}>+</button>
                     <button style={{padding:'5px'}} onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)-500000)}>-</button>
                 </div>
 
                 <div style={{flexDirection: 'column', display: 'flex'}}>
                     <p>Новая ипотека + все услуги и подстраховки</p>
-                    <input type="number"  step='500000' value={criticalFinance} onInput={(event)=> setCriticalFinance(Number(event.target.value))}/>
+                    <input type="number"  step='500000' value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>
                     <button style={{padding:'5px'}} onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>
                     <button style={{padding:'5px'}} onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
                 </div>
