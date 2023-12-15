@@ -2,8 +2,7 @@
   "name": "ipoteka",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://cossack-don.github.io/chart/",
-  "type": "module",
+    "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
