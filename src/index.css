@@ -13,3 +13,32 @@ body{
 h5 {
   color: #ffa733;
 }
+
+.button {
+  width: 35px;
+  height: 35px;
+  border: solid 1px #FFDC48;
+  border-radius: 5px;
+  color: #AB6800;
+  font-weight: bold;
+  background: #FFF9EB;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.input {
+  color:#178D46;
+  background: #E9FBF0;
+  border:solid 1px #9AEFBC;
+  padding: 10px 10px;
+  border-radius: 5px;
+}

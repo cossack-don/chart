@@ -13,6 +13,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    Filler,
 
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -25,14 +26,15 @@ ChartJS.register(annotationPlugin,
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,Filler
 );
 
 
 
 
 function App() {
-    const labels = [ 'Январь','Фвевраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль','Август','Сентябрь','Октябрь','Ноябрь'];
+    const labels = [ 'Январь 2024-0','Фвевраль 2024-1', 'Март 2024-2', 'Апрель 2024-3', 'Май 2024-4', 'Июнь 2024-5', 'Июль 2024-6','Август 2024-7','Сентябрь 2024-8','Октябрь 2024-9','Ноябрь 2024-10','Декабрь 2024-11',
+        'Январь 2025-0','Фвевраль 2025-1', 'Март 2025-2', 'Апрель 2025-3', 'Май 2025-4', 'Июнь 2025-5', 'Июль 2025-6','Август 2025-7','Сентябрь 2025-8','Октябрь 2025-9','Ноябрь 2025-10','Декабрь 2025-11'];
 
 
     const [criticalFinance,setCriticalFinance] = useState(2800000) as any //critical zone
@@ -44,40 +46,40 @@ function App() {
 
 
 let f = 200000
-    for(let i= 0; 11 >i; i++){
+    for(let i= 0; 24 >i; i++){
         featureFinance[i] = Number(currentFinance) + (f * i)
     }
 
-
-useEffect(()=>{
-
-    featureFinance.find((el:any,index:any)=>{
-        if(minimalFinanceIpoteka === 1000000 ) {
-            setW(0)
-
-        }
-        if(el <= minimalFinanceIpoteka) {
-
-            if( minimalFinanceIpoteka === 2000000 || minimalFinanceIpoteka === 3000000) {
-                setW(index)
-            }
-            if(minimalFinanceIpoteka === 2500000 || minimalFinanceIpoteka === 1500000 ||minimalFinanceIpoteka === 3500000) {
-                setW(index + 0.5)
-            }
-
-        }
-
-
-    })
-    if(currentFinance === 1500000) {
-        setW(5)
-    }
-    if(minimalFinanceIpoteka === 2000000) {
-        setW(2.5)
-    }
-},[
-    minimalFinanceIpoteka,featureFinance,currentFinance
-])
+//
+// useEffect(()=>{
+//
+//     featureFinance.find((el:any,index:any)=>{
+//         if(minimalFinanceIpoteka === 1000000 ) {
+//             setW(0)
+//
+//         }
+//         if(el <= minimalFinanceIpoteka) {
+//
+//             if( minimalFinanceIpoteka === 2000000 || minimalFinanceIpoteka === 3000000) {
+//                 setW(index)
+//             }
+//             if(minimalFinanceIpoteka === 2500000 || minimalFinanceIpoteka === 1500000 ||minimalFinanceIpoteka === 3500000) {
+//                 setW(index + 0.5)
+//             }
+//
+//         }
+//
+//
+//     })
+//     if(currentFinance === 1500000) {
+//         setW(5)
+//     }
+//     if(minimalFinanceIpoteka === 2000000) {
+//         setW(2.5)
+//     }
+// },[
+//     minimalFinanceIpoteka,featureFinance,currentFinance
+// ])
 
 
      const data = {
@@ -85,7 +87,7 @@ useEffect(()=>{
         datasets: [
             {
                 label: 'Актуальный бюджет на сегодня',
-                data:[currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance],
+                data:[currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance],
 
                 borderColor: '#ffea00',
                 backgroundColor: '#ffea00',
@@ -96,13 +98,15 @@ useEffect(()=>{
                 label: 'Доходная прогрессия',
                 data:featureFinance,
                 borderColor: '#76ff03',
-                backgroundColor: '#76ff03',
+                // backgroundColor: '#76ff03',
+                backgroundColor: 'rgba(118, 225, 3, 0.1)',
                 yAxisID: 'y',
+                fill: true,
                 borderDash:[14,14]
             },
             {
                 label: 'Общая сумма только на первый взнос по Ипотеке',
-                data:[minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka],
+                data:[minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka],
                 borderColor: '#ff9100',
                 backgroundColor: '#ff9100',
                 yAxisID: 'y',
@@ -110,7 +114,7 @@ useEffect(()=>{
             },
             {
                 label: 'Первый взнос Ипотеки + Съем + Ипотека Крас + остальные траты',
-                data:[criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance],
+                data:[criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance],
                 borderColor: '#ff3d00',
                 backgroundColor: '#ff3d00',
                 yAxisID: 'y',
@@ -158,14 +162,26 @@ useEffect(()=>{
                 annotations: {
                     point1: {
                         type: 'point',
-                        xValue: w,
+                        xValue: ()=>{
+                            for(let i=0;featureFinance.length > i; i++ ) {
+                                if(featureFinance[i] >= minimalFinanceIpoteka) {
+                                    return i
+                                }
+                            }
+                        },
                         yValue: minimalFinanceIpoteka,
                         backgroundColor: '#3d5afe'
                     },
                     point2: {
                         type: 'point',
-                        xValue: 9,
-                        yValue: 2800000,
+                        xValue: ()=>{
+                            for(let i=0;featureFinance.length > i; i++ ) {
+                                if(featureFinance[i] >= criticalFinance) {
+                                    return i
+                                }
+                            }
+                        },
+                        yValue: criticalFinance,
                         backgroundColor: '#3d5afe'
                     }
                 }
@@ -175,11 +191,18 @@ useEffect(()=>{
 
         },
         scales: {
-
+x:{
+    grid:{
+        color:'rgba(194,224,255,0.3)',
+        lineWidth:'10',
+        // border:'none'
+    }
+},
             y: {
                 type: 'linear' as const,
                 display: true,
                 position: 'left' as const,
+
             },
             y1: {
                 type: 'linear' as const,
@@ -191,35 +214,16 @@ useEffect(()=>{
             },
         },
     } as any
+
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
+
   return (
     <>
 
         <div style={{padding:'15px',background:'gray', display:'flex',justifyContent: 'space-around'}}>
-            <section style={{'display': 'flex'}}>
 
-                <div style={{flexDirection: 'column', display: 'flex'}}>
-                    <p>Бюджет на сегодня - $</p>
-                    <input type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
-                    <button style={{padding:'5px'}} onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
-                    <button style={{padding:'5px'}} onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
-                </div>
-
-                <div style={{flexDirection: 'column', display: 'flex'}}>
-                    <p>Необходимо 20% - $</p>
-                    <input type="number"  step='500000' value={minimalFinanceIpoteka} onInput={(event:any)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
-                    <button style={{padding:'5px'}} onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)+500000)}>+</button>
-                    <button style={{padding:'5px'}} onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)-500000)}>-</button>
-                </div>
-
-                <div style={{flexDirection: 'column', display: 'flex'}}>
-                    <p>Новая ипотека + все услуги и подстраховки</p>
-                    <input type="number"  step='500000' value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>
-                    <button style={{padding:'5px'}} onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>
-                    <button style={{padding:'5px'}} onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
-                </div>
-
-
-            </section>
 
             <div>
                 <h2>Новая ипотека</h2>
@@ -244,18 +248,53 @@ useEffect(()=>{
         </div>
 
 
-
-<div>
-
-
-
-
-
-</div>
-
-
           <Line style={{'width': '2200px'}} options={options} data={data} />
+        <section >
 
+            <div style={{display:'flex', marginBottom:'10px'}}>
+               <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                   <label style={{fontSize:'14px'}}>Бюджет на {date}</label>
+                   <input className='input' type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
+               </div>
+
+                <div style={{marginTop:'auto'}}>
+                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
+                    <button className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
+                </div>
+            </div>
+
+            <div style={{display:'flex', marginBottom:'10px'}}>
+                <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                    <label style={{fontSize:'14px'}}>Необходимо Денег 20%</label>
+                    <input className='input' type="number"   value={minimalFinanceIpoteka} onInput={(event:any)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
+                </div>
+
+                <div style={{display:'flex',marginTop:'auto'}}>
+                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)+500000)}>+</button>
+                    <button className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)-500000)}>-</button>
+                </div>
+            </div>
+
+            <div style={{display:'flex'}}>
+                <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                    <label style={{fontSize:'14px'}}>Сумма ипотеки и все расходы + услуги</label>
+                    <input className='input' type="number"   value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>
+                </div>
+
+
+                <div style={{marginTop:'auto'}}>
+                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>
+                    <button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
+                </div>
+
+                {/*<input type="number"  step='500000' value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>*/}
+                {/*<button style={{marginRight:'5px'}} className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>*/}
+                {/*<button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>*/}
+            </div>
+
+
+            <p>Итого будет на руках: {(Number(currentFinance) + Number(minimalFinanceIpoteka)).toLocaleString('ru')} руб.</p>
+        </section>
 
     </>
   )
