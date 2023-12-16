@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 
 import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
@@ -42,7 +42,7 @@ function App() {
     const [currentFinance,setCurrentFinance] = useState('1000000') as any //seychas $ nal
 
     const [featureFinance] = useState([]) as any
-    const [w,setW]= useState(null) as any
+
 
 
 let f = 200000
@@ -50,36 +50,7 @@ let f = 200000
         featureFinance[i] = Number(currentFinance) + (f * i)
     }
 
-//
-// useEffect(()=>{
-//
-//     featureFinance.find((el:any,index:any)=>{
-//         if(minimalFinanceIpoteka === 1000000 ) {
-//             setW(0)
-//
-//         }
-//         if(el <= minimalFinanceIpoteka) {
-//
-//             if( minimalFinanceIpoteka === 2000000 || minimalFinanceIpoteka === 3000000) {
-//                 setW(index)
-//             }
-//             if(minimalFinanceIpoteka === 2500000 || minimalFinanceIpoteka === 1500000 ||minimalFinanceIpoteka === 3500000) {
-//                 setW(index + 0.5)
-//             }
-//
-//         }
-//
-//
-//     })
-//     if(currentFinance === 1500000) {
-//         setW(5)
-//     }
-//     if(minimalFinanceIpoteka === 2000000) {
-//         setW(2.5)
-//     }
-// },[
-//     minimalFinanceIpoteka,featureFinance,currentFinance
-// ])
+
 
 
      const data = {
