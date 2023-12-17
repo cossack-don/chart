@@ -43,21 +43,22 @@ function App() {
 
     const [featureFinance] = useState([]) as any
 
+let [summMunthZP, setSummMunthZP] = useState(200000)
 
-
-let f = 200000
+// let f = 200000
     for(let i= 0; 24 >i; i++){
-        featureFinance[i] = Number(currentFinance) + (f * i)
+        featureFinance[i] = Number(currentFinance) + (summMunthZP * i)
     }
 
 
 
-
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
      const data = {
         labels,
         datasets: [
             {
-                label: 'Актуальный бюджет на сегодня',
+                label: `Бюджет на  ${date}`,
                 data:[currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance,currentFinance],
 
                 borderColor: '#ffea00',
@@ -69,14 +70,13 @@ let f = 200000
                 label: 'Доходная прогрессия',
                 data:featureFinance,
                 borderColor: '#76ff03',
-                // backgroundColor: '#76ff03',
                 backgroundColor: 'rgba(118, 225, 3, 0.1)',
                 yAxisID: 'y',
                 fill: true,
                 borderDash:[14,14]
             },
             {
-                label: 'Общая сумма только на первый взнос по Ипотеке',
+                label: 'Необходимо заработать денег на первый взнос - 20%',
                 data:[minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka,minimalFinanceIpoteka],
                 borderColor: '#ff9100',
                 backgroundColor: '#ff9100',
@@ -84,7 +84,7 @@ let f = 200000
                 borderDash:[4,5]
             },
             {
-                label: 'Первый взнос Ипотеки + Съем + Ипотека Крас + остальные траты',
+                label: 'Сумма первого взноса ипотеки и все расходы + услуги',
                 data:[criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance,criticalFinance],
                 borderColor: '#ff3d00',
                 backgroundColor: '#ff3d00',
@@ -93,19 +93,17 @@ let f = 200000
 
             {
                 label: '',
-                data:[900000,900000,900000,900000,900000,900000],
-
-                borderColor: '#ffffff',
-                backgroundColor: '#ffffff',
+                data:[900000],
+                borderColor: 'rgba(118, 225, 3, 0)',
+                backgroundColor: 'rgba(118, 225, 3, 0)',
                 yAxisID: 'y',
             },
 
             {
                 label: '',
-                data:[3500000,3500000,3500000,3500000,3500000,3500000],
-
-                borderColor: '#ffffff',
-                backgroundColor: '#ffffff',
+                data:[3500000],
+                borderColor: 'rgba(118, 225, 3, 0)',
+                backgroundColor: 'rgba(118, 225, 3, 0)',
                 yAxisID: 'y',
             },
         ],
@@ -186,87 +184,129 @@ x:{
         },
     } as any
 
-    const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
 
 
   return (
     <>
 
-        <div style={{padding:'15px',background:'gray', display:'flex',justifyContent: 'space-around'}}>
-
-
-            <div>
-                <h2>Новая ипотека</h2>
-                <h3>10 000 000 - 20% = 2 000 000 руб.</h3>
-                <h3>11 000 000 - 20% = 2 200 000 руб.</h3>
-                <h3>12 000 000 - 20% = 2 400 000 руб.</h3>
-                <h3>13 000 000 - 20% = 2 600 000 руб.</h3>
-
-                <h5>Оказание юр.услуг - 30ка</h5>
-                <h5>Открытие эксроу счета 10ка</h5>
-                <h5>Страховка на меня</h5>
-                <h5>Страховка на недвижимость</h5>
-                <h5>Ремонт + техника</h5>
-
-                <h2>Остальные расходы</h2>
-                <h5>Ипотека Краснодар 23ка - 30 лет</h5>
-                <h5>ЖКХ - 4ка</h5>
-                <h5>Страховка на меня 1 раз в год</h5>
-                <h5>Страховка на недвижимость 1 раз в год</h5>
-                <h5>Налог на квартиру 1 раз в год</h5>
-            </div>
-        </div>
-
-
+<h2>Калькулятор планируемой ипотеки</h2>
           <Line style={{'width': '2200px'}} options={options} data={data} />
-        <section >
-
-            <div style={{display:'flex', marginBottom:'10px'}}>
-               <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
-                   <label style={{fontSize:'14px'}}>Бюджет на {date}</label>
-                   <input className='input' type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
-               </div>
-
-                <div style={{marginTop:'auto'}}>
-                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
-                    <button className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
-                </div>
-            </div>
-
-            <div style={{display:'flex', marginBottom:'10px'}}>
-                <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
-                    <label style={{fontSize:'14px'}}>Необходимо Денег 20%</label>
-                    <input className='input' type="number"   value={minimalFinanceIpoteka} onInput={(event:any)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
-                </div>
-
-                <div style={{display:'flex',marginTop:'auto'}}>
-                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)+500000)}>+</button>
-                    <button className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)-500000)}>-</button>
-                </div>
-            </div>
-
-            <div style={{display:'flex'}}>
-                <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
-                    <label style={{fontSize:'14px'}}>Сумма ипотеки и все расходы + услуги</label>
-                    <input className='input' type="number"   value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>
-                </div>
 
 
-                <div style={{marginTop:'auto'}}>
-                    <button style={{marginRight:'5px'}} className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>
-                    <button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
-                </div>
+      <div style={{display:'flex'}}>
+          <section style={{marginRight:'15px'}}>
 
-                {/*<input type="number"  step='500000' value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>*/}
-                {/*<button style={{marginRight:'5px'}} className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>*/}
-                {/*<button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>*/}
-            </div>
+              <div style={{display:'flex'}}>
+                  <div style={{marginTop:'auto', marginRight:'5px', background:'#76ff03', width:'35px',height:'35px',borderRadius:'5px'}}/>
+                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                      <label style={{fontSize:'14px'}}>Доходная прогрессия в месяц {summMunthZP.toLocaleString('ru')} руб.</label>
+                      <input className='input' type="number"   value={summMunthZP} onInput={(event:any)=> setSummMunthZP(Number(event.target.value))}/>
+                  </div>
+
+                  <div style={{marginTop:'auto'}}>
+                      <button style={{marginRight:'5px'}} className="button" onClick={()=>setSummMunthZP((value:any)=> Number(value)+100000)}>+</button>
+                      <button className="button" onClick={()=>setSummMunthZP((value:any)=> Number(value)-100000)}>-</button>
+                  </div>
+              </div>
+
+              <div style={{display:'flex', marginBottom:'10px'}}>
+                  <div style={{marginTop:'auto', marginRight:'5px', background:'#ffea00', width:'35px',height:'35px',borderRadius:'5px'}}/>
+                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                      <label style={{fontSize:'14px'}}>Бюджет на {date}</label>
+                      <input className='input' type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
+                  </div>
+
+                  <div style={{marginTop:'auto'}}>
+                      <button style={{marginRight:'5px'}} className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
+                      <button className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
+                  </div>
+              </div>
+
+              <div style={{display:'flex', marginBottom:'10px'}}>
+                  <div style={{marginTop:'auto', marginRight:'5px', background:'#ff9100', width:'35px',height:'35px',borderRadius:'5px'}}/>
+                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                      <label style={{fontSize:'14px'}}>Необходимо заработать денег на первый взнос - 20%</label>
+                      <input className='input' type="number"   value={minimalFinanceIpoteka} onInput={(event:any)=> setMinimalFinanceIpoteka(Number(event.target.value))}/>
+                  </div>
+
+                  <div style={{display:'flex',marginTop:'auto'}}>
+                      <button style={{marginRight:'5px'}} className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)+500000)}>+</button>
+                      <button className="button" onClick={()=>setMinimalFinanceIpoteka((value:any)=> Number(value)-500000)}>-</button>
+                  </div>
+              </div>
+
+              <div style={{display:'flex'}}>
+                  <div style={{marginTop:'auto', marginRight:'5px', background:'#ff3d00', width:'35px',height:'35px',borderRadius:'5px'}}/>
+                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
+                      <label style={{fontSize:'14px'}}>Сумма первого взноса ипотеки и все расходы + услуги</label>
+                      <input className='input' type="number"   value={criticalFinance} onInput={(event:any)=> setCriticalFinance(Number(event.target.value))}/>
+                  </div>
 
 
-            <p>Итого будет на руках: {(Number(currentFinance) + Number(minimalFinanceIpoteka)).toLocaleString('ru')} руб.</p>
-        </section>
+                  <div style={{marginTop:'auto'}}>
+                      <button style={{marginRight:'5px'}} className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)+500000)}>+</button>
+                      <button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
+                  </div>
+              </div>
 
+
+          </section>
+
+          <section>
+              <h4>Примеры для новостроек. С 23 декабря сумма ипотеки 6 млн и первый взнос 30%</h4>
+              <table>
+                  <tr>
+                      <th>Сумма квартиры</th>
+                      <th>% первого взноса</th>
+                      <th>Сумма первого взноса</th>
+                  </tr>
+                  <tr>
+                      <td>10 000 000 руб.</td>
+                      <td>20%</td>
+                      <td>2 000 000 руб.</td>
+                  </tr>
+                  <tr>
+                      <td>10 000 000 руб.</td>
+                      <td>30%</td>
+                      <td>3 000 000 руб.</td>
+                  </tr>
+                  <tr>
+                      <td>11 000 000 руб.</td>
+                      <td>20%</td>
+                      <td>2 200 000 руб.</td>
+                  </tr>
+                  <tr>
+                      <td>11 000 000 руб.</td>
+                      <td>30%</td>
+                      <td>3 300 000 руб.</td>
+                  </tr>
+                  <tr>
+                      <td>12 000 000 руб.</td>
+                      <td>20%</td>
+                      <td>2 400 000 руб.</td>
+                  </tr>
+                  <tr>
+                      <td>12 000 000 руб.</td>
+                      <td>30%</td>
+                      <td>3 600 000 руб.</td>
+                  </tr>
+              </table>
+
+          </section>
+      </div>
+
+   <div style={{marginTop:'45px'}}>
+
+       <h3>Калькулятор ипотеки</h3>
+       <iframe
+           width="100%"
+           height="700"
+           allowFullScreen="true"
+           src="https://ru.myfin.by/bank/sberbank/kalkulator-ipoteki?attribute=&CreditCalculatorMortgageFormBank%5Bform_bank_sef_alias%5D=sberbank&CreditCalculatorMortgageFormBank%5Bform_product_id%5D=304&CreditCalculatorMortgageFormBank%5Bamount_start%5D=11000000&CreditCalculatorMortgageFormBank%5Bperiod_year%5D=30&CreditCalculatorMortgageFormBank%5Bvznos%5D=3000000&CreditCalculatorMortgageFormBank%5Bvznos_currency%5D=5&CreditCalculatorMortgageFormBank%5Btype_calc%5D=&CreditCalculatorMortgageFormBank%5Btype_calc%5D=0&CreditCalculatorMortgageFormBank%5Bdate%5D=09.12.2023&CreditCalculatorMortgageFormBank%5Bone_time_commission%5D=0&CreditCalculatorMortgageFormBank%5Bone_time_fee_currency%5D=5&CreditCalculatorMortgageFormBank%5Badditional_monthly_payments%5D=0&CreditCalculatorMortgageFormBank%5Bpreterms%5D%5B2%5D=09.12.2023%3A100000%3A2%3A1"
+       >
+       </iframe>
+   </div>
     </>
   )
 }
