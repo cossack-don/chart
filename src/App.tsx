@@ -302,7 +302,7 @@ x:{
        <iframe
            width="100%"
            height="700"
-           allowFullScreen="true"
+
            src="https://ru.myfin.by/bank/sberbank/kalkulator-ipoteki?attribute=&CreditCalculatorMortgageFormBank%5Bform_bank_sef_alias%5D=sberbank&CreditCalculatorMortgageFormBank%5Bform_product_id%5D=304&CreditCalculatorMortgageFormBank%5Bamount_start%5D=11000000&CreditCalculatorMortgageFormBank%5Bperiod_year%5D=30&CreditCalculatorMortgageFormBank%5Bvznos%5D=3000000&CreditCalculatorMortgageFormBank%5Bvznos_currency%5D=5&CreditCalculatorMortgageFormBank%5Btype_calc%5D=&CreditCalculatorMortgageFormBank%5Btype_calc%5D=0&CreditCalculatorMortgageFormBank%5Bdate%5D=09.12.2023&CreditCalculatorMortgageFormBank%5Bone_time_commission%5D=0&CreditCalculatorMortgageFormBank%5Bone_time_fee_currency%5D=5&CreditCalculatorMortgageFormBank%5Badditional_monthly_payments%5D=0&CreditCalculatorMortgageFormBank%5Bpreterms%5D%5B2%5D=09.12.2023%3A100000%3A2%3A1"
        >
        </iframe>
