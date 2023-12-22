@@ -1,8 +1,10 @@
-import {useState} from 'react'
+import { useState} from 'react'
 
 import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
-
+import 'chartjs-adapter-date-fns';
+import { ru } from 'date-fns/locale'
+import { format, addYears,addMonths } from 'date-fns';
 
 import {
     Chart as ChartJS,
@@ -19,7 +21,9 @@ import {
 import { Line } from 'react-chartjs-2';
 
 
-ChartJS.register(annotationPlugin,
+
+ChartJS.register(
+    annotationPlugin,
     CategoryScale,
     LinearScale,
     PointElement,
@@ -33,10 +37,19 @@ ChartJS.register(annotationPlugin,
 
 
 function App() {
-    const labels = [ 'Январь 2024-0','Фвевраль 2024-1', 'Март 2024-2', 'Апрель 2024-3', 'Май 2024-4', 'Июнь 2024-5', 'Июль 2024-6','Август 2024-7','Сентябрь 2024-8','Октябрь 2024-9','Ноябрь 2024-10','Декабрь 2024-11',
-        'Январь 2025-0','Фвевраль 2025-1', 'Март 2025-2', 'Апрель 2025-3', 'Май 2025-4', 'Июнь 2025-5', 'Июль 2025-6','Август 2025-7','Сентябрь 2025-8','Октябрь 2025-9','Ноябрь 2025-10','Декабрь 2025-11',
-        'Январь 2026-0','Фвевраль 2026-1', 'Март 2026-2', 'Апрель 2026-3', 'Май 2026-4', 'Июнь 2026-5', 'Июль 2026-6','Август 2026-7','Сентябрь 2026-8','Октябрь 2026-9','Ноябрь 2026-10','Декабрь 2026-11'
-    ];
+
+    const [stateOptionSelect, setStateOptionSelect] = useState('36') //select
+
+const labels =[]
+// const labels = [format(new Date(), 'dd-MM-yyyy'),format(addMonths(new Date(), 1), 'dd-MM-yyyy')]
+    for(let i= 0; stateOptionSelect >i; i++){
+        labels[i] = format(addMonths(new Date(), i), 'dd-MMMM-yyyy',{locale: ru})
+    }
+
+
+
+
+
 
 
     const [criticalFinance,setCriticalFinance] = useState(2800000) as any //critical zone
@@ -48,7 +61,7 @@ function App() {
 let [summMunthZP, setSummMunthZP] = useState(200000)
 
 // let f = 200000
-    for(let i= 0; 36 >i; i++){
+    for(let i= 0; stateOptionSelect >i; i++){
         featureFinance[i] = Number(currentFinance) + (summMunthZP * i)
     }
 
@@ -162,7 +175,29 @@ let [summMunthZP, setSummMunthZP] = useState(200000)
 
         },
         scales: {
+
 x:{
+    // type: 'time',
+    adapters: {
+        date: {
+            locale: ru
+        },
+    },
+        // type: 'time',
+        // time: {
+        //     unit: 'month'
+        // },
+
+    // type: 'time',
+    // time:{
+    //     unit:'day',
+    //     parser:'dd:mm:yyyy'
+    // },
+    // adapters: {
+    //     date: {
+    //         locale: enUS,
+    //     },
+    // },
     grid:{
         color:'rgba(194,224,255,0.3)',
         lineWidth:'10',
@@ -192,10 +227,16 @@ x:{
   return (
     <>
 
+
+
 <h2>Калькулятор планируемой ипотеки</h2>
           <Line style={{'width': '2200px'}} options={options} data={data} />
 
-
+        <select value={stateOptionSelect} onChange={e => setStateOptionSelect(e.target.value)}  >
+            <option value="24">2 года</option>
+            <option value="36">3 года</option>
+            <option value="48">4 года</option>
+        </select>
       <div style={{display:'flex', marginTop:'25px'}}>
           <section style={{marginRight:'15px'}}>
 
