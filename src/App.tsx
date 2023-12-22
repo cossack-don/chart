@@ -4,7 +4,7 @@ import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
 import { ru } from 'date-fns/locale'
-import { format, addYears,addMonths } from 'date-fns';
+import { format,addMonths } from 'date-fns';
 
 import {
     Chart as ChartJS,
@@ -38,7 +38,7 @@ ChartJS.register(
 
 function App() {
 
-    const [stateOptionSelect, setStateOptionSelect] = useState('36') //select
+    const [stateOptionSelect, setStateOptionSelect] = useState('36') as any //select
 
 const labels =[]
 // const labels = [format(new Date(), 'dd-MM-yyyy'),format(addMonths(new Date(), 1), 'dd-MM-yyyy')]
