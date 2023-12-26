@@ -46,7 +46,17 @@ input::-webkit-inner-spin-button {
 }
 
 
+.button-reset {
+  border:1px solid #FFBDC2;
+  background: #FFF0F1;
+  color:#94000D;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 
+.button-reset:hover{
+  cursor: pointer;
+}
 
 table {
   font-family: arial, sans-serif;
