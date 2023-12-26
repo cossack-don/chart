@@ -229,7 +229,7 @@ x:{
 
 const handlerResetChartData = ()=>{
     setStateOptionSelect('36')
-    setSummMunthZP('200000')
+    setSummMunthZP(200000)
     setCurrentFinance('1000000')
     setMinimalFinanceIpoteka(2500000)
     setCriticalFinance(2800000)
@@ -264,7 +264,7 @@ const handlerResetChartData = ()=>{
         ],
     } as any;
 
-    const result = dataD.datasets[0].data.reduce((acc,el)=>{
+    const result = dataD.datasets[0].data.reduce((acc:any,el:any)=>{
         return acc+el
     },0)
 
