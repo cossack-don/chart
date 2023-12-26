@@ -249,11 +249,11 @@ function App() {
 
     //
     //
-    const [stateBaseSum, setStateBaseSum] = useState('')
-    const [statePercentFromSumFeatureIpoteki, setStatePercentFromSumFeatureIpoteki] = useState('')
+    const [stateBaseSum, setStateBaseSum] = useState('') as any
+    const [statePercentFromSumFeatureIpoteki, setStatePercentFromSumFeatureIpoteki] = useState('') as any
     const handlerResetCalcPercentFromSumIpoteka = () => {
-        setStateBaseSum((value) => value = '')
-        setStatePercentFromSumFeatureIpoteki((value) => value = '')
+        setStateBaseSum((value: any) => value = '')
+        setStatePercentFromSumFeatureIpoteki((value: any) => value = '')
     }
     return (
         <>
