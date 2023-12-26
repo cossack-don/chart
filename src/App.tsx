@@ -6,6 +6,9 @@ import 'chartjs-adapter-date-fns';
 import { ru } from 'date-fns/locale'
 import { format,addMonths } from 'date-fns';
 
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,13 +19,15 @@ import {
     Tooltip,
     Legend,
     Filler,
+    ArcElement
 
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Doughnut } from 'react-chartjs-2';
 
 
 
 ChartJS.register(
+    ArcElement,
     annotationPlugin,
     CategoryScale,
     LinearScale,
@@ -222,51 +227,118 @@ x:{
     } as any
 
 
+const handlerResetChartData = ()=>{
+    setStateOptionSelect('36')
+    setSummMunthZP('200000')
+    setCurrentFinance('1000000')
+    setMinimalFinanceIpoteka(2500000)
+    setCriticalFinance(2800000)
+}
 
 
+
+     const dataD = {
+        labels: ['Съем Кв. и ЖКХ', 'Ипотека Краснодар и ЖКХ', 'Новая ипотека', 'Доп. сумма ипотеки', 'Purple', 'Orange'],
+        datasets: [
+            {
+                label: '# of Votes',
+                data: [65000, 26000, 175000, 25000],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    } as any;
+
+    const result = dataD.datasets[0].data.reduce((acc,el)=>{
+        return acc+el
+    },0)
+
+
+    type ValuePiece = Date | null;
+
+    type Value = ValuePiece | [ValuePiece, ValuePiece];
+    const [value, onChange] = useState<Value>(new Date()) as any
   return (
     <>
 
+        <div className="grid-wrapper">
+            <span  className="bg chart">
+                <Line  options={options} data={data} />
+            </span>
+            <span  className="bg">
+
+<div style={{display: 'flex',alignItems:'center'}}>
+          <img src={'./public/logo.jpg'} width={100} height="auto" alt="logo"/>
+                <h6>Планирование ипотеки</h6>
+</div>
+<a href="https://ru.myfin.by/" target="_blank">Кальк</a>
 
 
-<h2>Калькулятор планируемой ипотеки</h2>
-          <Line style={{'width': '2200px'}} options={options} data={data} />
 
-        <select value={stateOptionSelect} onChange={e => setStateOptionSelect(e.target.value)}  >
+            </span>
+            <span  className="bg dd">
+ <div style={{display:'flex', justifyContent:'space-between'}}>
+                          <select value={stateOptionSelect} onChange={e => setStateOptionSelect(e.target.value)}  >
             <option value="24">2 года</option>
             <option value="36">3 года</option>
             <option value="48">4 года</option>
         </select>
-      <div style={{display:'flex', marginTop:'25px'}}>
-          <section style={{marginRight:'15px'}}>
 
-              <div style={{display:'flex', marginBottom:'10px'}}>
-                  <div style={{marginTop:'auto', marginRight:'5px', background:'#76ff03', width:'35px',height:'35px',borderRadius:'5px'}}/>
-                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
-                      <label style={{fontSize:'14px'}}>Доходная прогрессия в месяц {summMunthZP.toLocaleString('ru')} руб.</label>
-                      <input className='input' type="number"   value={summMunthZP} onInput={(event:any)=> setSummMunthZP(Number(event.target.value))}/>
-                  </div>
 
-                  <div style={{marginTop:'auto'}}>
-                      <button style={{marginRight:'5px'}} className="button" onClick={()=>setSummMunthZP((value:any)=> Number(value)+100000)}>+</button>
+       <button onClick={handlerResetChartData}> Reset Chart Data</button>
+ </div>
+
+            <div style={{display:'flex', marginBottom:'10px'}}>
+
+                  <div style={{marginTop:'auto', marginRight:'5px', background:'#76ff03', width:'55px',height:'35px',borderRadius:'5px'}}/>
+
+                  <div >
+                      <label style={{fontSize:'12px'}}>Доходная прогрессия в месяц</label>
+                      <input style={{width:'100px'}} className='input' type="number"   value={summMunthZP} onInput={(event:any)=> setSummMunthZP(Number(event.target.value))}/>
+
+                        <button style={{marginRight:'5px'}} className="button" onClick={()=>setSummMunthZP((value:any)=> Number(value)+100000)}>+</button>
                       <button className="button" onClick={()=>setSummMunthZP((value:any)=> Number(value)-100000)}>-</button>
                   </div>
+
+
               </div>
 
-              <div style={{display:'flex', marginBottom:'10px'}}>
-                  <div style={{marginTop:'auto', marginRight:'5px', background:'#ffea00', width:'35px',height:'35px',borderRadius:'5px'}}/>
-                  <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
-                      <label style={{fontSize:'14px'}}>Бюджет на {date}</label>
-                      <input className='input' type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
-                  </div>
 
-                  <div style={{marginTop:'auto'}}>
+<div style={{display:'flex',alignItems:'end'}}>
+    <div style={{ marginRight:'5px', background:'#ffea00', width:'55px',height:'35px',borderRadius:'5px'}}/>
+
+         <div>
+                      <label style={{fontSize:'12px'}}>Бюджет на {date}</label>
+                      <input style={{width:'100px'}} className='input' type="number"   value={currentFinance} onInput={(event:any)=> setCurrentFinance(Number(event.target.value))}/>
+
                       <button style={{marginRight:'5px'}} className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)+500000)}>+</button>
                       <button className="button" onClick={()=>setCurrentFinance((value:any)=> Number(value)-500000)}>-</button>
                   </div>
-              </div>
+</div>
 
-              <div style={{display:'flex', marginBottom:'10px'}}>
+
+
+
+
+
+            </span>
+            <span className="bg dd">
+                     <div style={{display:'flex', marginBottom:'10px'}}>
                   <div style={{marginTop:'auto', marginRight:'5px', background:'#ff9100', width:'35px',height:'35px',borderRadius:'5px'}}/>
                   <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
                       <label style={{fontSize:'14px'}}>Необходимо заработать денег на первый взнос - 20%</label>
@@ -279,7 +351,7 @@ x:{
                   </div>
               </div>
 
-              <div style={{display:'flex'}}>
+                    <div style={{display:'flex'}}>
                   <div style={{marginTop:'auto', marginRight:'5px', background:'#ff3d00', width:'35px',height:'35px',borderRadius:'5px'}}/>
                   <div style={{display:'flex',  flexDirection: 'column', marginRight:'5px'}}>
                       <label style={{fontSize:'14px'}}>Сумма первого взноса ипотеки и все расходы + услуги</label>
@@ -292,56 +364,52 @@ x:{
                       <button className="button" onClick={()=>setCriticalFinance((value:any)=> Number(value)-500000)}>-</button>
                   </div>
               </div>
+            </span>
+
+            <span className="bg">
+                3
+            </span>
+            <a href="#" className="bg ">
+                4
+            </a>
+            <span  className=" bg">
+                 5
+            </span>
+            <span  className="big bg">
+                       <Calendar onChange={onChange} value={value} /> 6
+            </span>
+            <span className="bg big">
+                <Doughnut data={dataD}/>
+                {result.toLocaleString('ru')} руб. 7
+
+            </span>
+            <a href="#" className=" bg bg-9">
+                8
+            </a>
+            <a href="#" className="big bg ">
+                9
+            </a>
+            <a href="#" className="tall bg bg-11">
+                10
+            </a>
+            <a href="#" className="bg bg-12">
+                11
+            </a>
+            <a href="#" className="bg">
+                12
+            </a>
+            <a href="#" className="bg">
+                13
+            </a>
+            <a href="#" className="bg">
+                14
+            </a>
+            <a href="#" className="wide bg">
+                15
+            </a>
+        </div>
 
 
-          </section>
-
-          <section>
-              <h4>Примеры для новостроек. С 23 декабря сумма ипотеки 6 млн и первый взнос 30%</h4>
-              <table>
-                  <tr>
-                      <th>Сумма квартиры</th>
-                      <th>% первого взноса</th>
-                      <th>Сумма первого взноса</th>
-                  </tr>
-                  <tr>
-                      <td>10 000 000 руб.</td>
-                      <td>20%</td>
-                      <td>2 000 000 руб.</td>
-                  </tr>
-                  <tr>
-                      <td>10 000 000 руб.</td>
-                      <td>30%</td>
-                      <td>3 000 000 руб.</td>
-                  </tr>
-                  <tr>
-                      <td>11 000 000 руб.</td>
-                      <td>20%</td>
-                      <td>2 200 000 руб.</td>
-                  </tr>
-                  <tr>
-                      <td>11 000 000 руб.</td>
-                      <td>30%</td>
-                      <td>3 300 000 руб.</td>
-                  </tr>
-                  <tr>
-                      <td>12 000 000 руб.</td>
-                      <td>20%</td>
-                      <td>2 400 000 руб.</td>
-                  </tr>
-                  <tr>
-                      <td>12 000 000 руб.</td>
-                      <td>30%</td>
-                      <td>3 600 000 руб.</td>
-                  </tr>
-              </table>
-
-          </section>
-      </div>
-
-   <div style={{marginTop:'45px'}}>
-       <a className='button' style={{color:'blue',padding:'15px'}} href="https://ru.myfin.by/" target="_blank">Мощный калькулятор ипотек, кредитов и вкладов</a>
-   </div>
     </>
   )
 }
