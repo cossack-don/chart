@@ -395,7 +395,13 @@ function App() {
                 <p>Итого: {(stateBaseSum / 100) * statePercentFromSumFeatureIpoteki} руб.</p>----3
             </span>
                 <span className="bg ">
-
+<ul>
+    <li>15 числа оплата инертета дома и съем</li>
+<li>15 числа - ипотека оплата 26ка + 25ка</li>
+    <li>5 числа оплата сьемной квартиры - 65ка</li>
+    <li>5 числа 75ка - новая ипотека</li>
+    <li>20 числа 100ка - новая ипотека</li>
+</ul>
 
                 4
             </span>
