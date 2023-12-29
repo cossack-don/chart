@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 // import {CurrencyInput} from 'react-currency-mask';
-
+import {IMaskInput} from 'react-imask';
 import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
 import 'chartjs-adapter-date-fns';
@@ -53,12 +53,12 @@ function App() {
 
 
     const [criticalFinance, setCriticalFinance] = useState(2800000) as any //critical zone
-    const [minimalFinanceIpoteka, setMinimalFinanceIpoteka] = useState(2500000) as any //20%
-    const [currentFinance, setCurrentFinance] = useState('1000000') as any //seychas $ nal
+    const [minimalFinanceIpoteka, setMinimalFinanceIpoteka] = useState(2500000) as any // Первый взнос 20%/30%
+    const [currentFinance, setCurrentFinance] = useState('2000000') as any //Сейчас денег налика
 
     const [featureFinance] = useState([]) as any
 
-    const [summMunthZP, setSummMunthZP] = useState(200000)
+    const [summMunthZP, setSummMunthZP] = useState('175000') // Могу отложить в месяц
 
 
     for (let i = 0; stateOptionSelect > i; i++) {
@@ -224,20 +224,12 @@ function App() {
         setStatePercentFromSumFeatureIpoteki('')
     }
 
-    // const [w] = useState('1000000')
+
+    const ref = useRef(null);
+    const inputRef = useRef(null);
     return (
         <>
 
-            {/*<CurrencyInput*/}
-            {/*    value={w}*/}
-            {/*    hideSymbol*/}
-            {/*    onChangeValue={(event, originalValue) => {*/}
-
-            {/*        // Math.ceil(originalValue)*/}
-
-            {/*        console.log(Math.ceil(originalValue));*/}
-            {/*    }}*/}
-            {/*/>*/}
 
             <div className="grid-wrapper">
             <span className="bg chart">
@@ -279,13 +271,34 @@ function App() {
 
                   <div>
                       <label style={{fontSize: '12px'}}>Доходная прогрессия в месяц</label>
-                      <input style={{width: '100px'}} className='input' type="number" value={summMunthZP}
-                             onInput={(event: any) => setSummMunthZP(Number(event.target.value))}/>
+                            <IMaskInput
+                                style={{width: '100px'}}
+                                className='input'
+                                mask={Number}
+                                radix="."
+                                thousandsSeparator={' '}
+                                value={summMunthZP}
+                                unmask={true}
+                                ref={ref}
 
-                        <button style={{marginRight: '5px'}} className="button"
-                                onClick={() => setSummMunthZP((value: any) => Number(value) + 100000)}>+</button>
+                                inputRef={inputRef}
+                                onAccept={
+
+                                    (value, mask) => {
+                                        setSummMunthZP(value)
+                                    }
+                                }
+                                placeholder='Доход в месяц'
+                            />
+
+
+                      <button style={{marginRight: '5px'}}
+                              className="button"
+                              onClick={() => setSummMunthZP((value: string) => String(Number(value) + 50000))}
+                      >+</button>
                       <button className="button"
-                              onClick={() => setSummMunthZP((value: any) => Number(value) - 100000)}>-</button>
+                              onClick={() => setSummMunthZP((value: string) => String(Number(value) - 50000))}
+                      >-</button>
                   </div>
 
 
@@ -297,13 +310,36 @@ function App() {
 
          <div>
                       <label style={{fontSize: '12px'}}>Бюджет на {date}</label>
-                      <input style={{width: '100px'}} className='input' type="number" value={currentFinance}
-                             onInput={(event: any) => setCurrentFinance(Number(event.target.value))}/>
+                      <IMaskInput
+                          style={{width: '100px'}}
+                          className='input'
+                          mask={Number}
+                          radix="."
+                          thousandsSeparator={' '}
+                          value={currentFinance}
+                          unmask={true}
+                          ref={ref}
+                          scale={2}
+                          inputRef={inputRef}
+                          onAccept={
 
-                      <button style={{marginRight: '5px'}} className="button"
-                              onClick={() => setCurrentFinance((value: any) => Number(value) + 500000)}>+</button>
-                      <button className="button"
-                              onClick={() => setCurrentFinance((value: any) => Number(value) - 500000)}>-</button>
+                              (value, mask) => {
+                                  setCurrentFinance(value)
+                              }
+                          }
+                          placeholder='Доход в месяц'
+                      />
+
+
+             <button
+                 style={{marginRight: '5px'}}
+                 className="button"
+                 onClick={() => setCurrentFinance((value: string) => String(Number(value) + 500000))}
+             >+</button>
+             <button
+                 className="button"
+                 onClick={() => setCurrentFinance((value: string) => String(Number(value) - 500000))}
+             >-</button>
                   </div>
 </div>
 
@@ -325,6 +361,25 @@ function App() {
                   }}/>
                   <div style={{display: 'flex', flexDirection: 'column', marginRight: '5px'}}>
                       <label style={{fontSize: '14px'}}>Необходимо заработать денег на первый взнос - 20%</label>
+                              <IMaskInput
+                                  style={{width: '100px'}}
+                                  className='input'
+                                  mask={Number}
+                                  radix="."
+                                  thousandsSeparator={' '}
+                                  value={summMunthZP}
+                                  unmask={true}
+                                  ref={ref}
+
+                                  inputRef={inputRef}
+                                  onAccept={
+
+                                      (value, mask) => {
+                                          setSummMunthZP(value)
+                                      }
+                                  }
+                                  placeholder='Доход в месяц'
+                              />
                       <input className='input' type="number" value={minimalFinanceIpoteka}
                              onInput={(event: any) => setMinimalFinanceIpoteka(Number(event.target.value))}/>
                   </div>
