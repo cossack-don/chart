@@ -202,7 +202,7 @@ function App() {
 
     const handlerResetChartData = () => {
         setStateOptionSelect('36')
-        setSummMunthZP(200000) as any
+        setSummMunthZP('200000')
         setCurrentFinance('1000000')
         setMinimalFinanceIpoteka(2500000)
         setCriticalFinance(2800000)
@@ -284,7 +284,7 @@ function App() {
                                 inputRef={inputRef}
                                 onAccept={
 
-                                    (value, mask) => {
+                                    (value) => {
                                         setSummMunthZP(value)
                                     }
                                 }
