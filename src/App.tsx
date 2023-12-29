@@ -1,4 +1,5 @@
 import {useState} from 'react'
+// import {CurrencyInput} from 'react-currency-mask';
 
 import './App.css'
 import annotationPlugin from 'chartjs-plugin-annotation';
@@ -22,7 +23,9 @@ import {
     ArcElement
 
 } from 'chart.js';
-import {Line, Doughnut} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
+import {CardPaymentsDates} from "./components/CardPaymentsDates";
+import {ChartPaymentsCost} from "./charts/ChartPaymentsCost";
 
 
 ChartJS.register(
@@ -43,7 +46,7 @@ function App() {
     const [stateOptionSelect, setStateOptionSelect] = useState('36') as any //select
 
     const labels = []
-// const labels = [format(new Date(), 'dd-MM-yyyy'),format(addMonths(new Date(), 1), 'dd-MM-yyyy')]
+
     for (let i = 0; stateOptionSelect > i; i++) {
         labels[i] = format(addMonths(new Date(), i), 'dd-MMMM-yyyy', {locale: ru})
     }
@@ -55,9 +58,9 @@ function App() {
 
     const [featureFinance] = useState([]) as any
 
-    let [summMunthZP, setSummMunthZP] = useState(200000)
+    const [summMunthZP, setSummMunthZP] = useState(200000)
 
-// let f = 200000
+
     for (let i = 0; stateOptionSelect > i; i++) {
         featureFinance[i] = Number(currentFinance) + (summMunthZP * i)
     }
@@ -134,10 +137,7 @@ function App() {
             intersect: false,
         },
         stacked: false,
-
-
         plugins: {
-
             annotation: {
                 annotations: {
                     point1: {
@@ -209,38 +209,6 @@ function App() {
     }
 
 
-    const dataD = {
-        labels: ['Съем Кв. и ЖКХ - 65 000', 'Ипотека Краснодар и ЖКХ - 26 000', 'Новая ипотека - 175 000', 'Доп. сумма ипотеки - 25 000'],
-        datasets: [
-            {
-                label: '# of Votes',
-                data: [65000, 26000, 175000, 25000],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    } as any;
-
-    const result = dataD.datasets[0].data.reduce((acc: any, el: any) => {
-        return acc + el
-    }, 0)
-
-
     type ValuePiece = Date | null;
 
     type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -255,8 +223,22 @@ function App() {
         setStateBaseSum('')
         setStatePercentFromSumFeatureIpoteki('')
     }
+
+    // const [w] = useState('1000000')
     return (
         <>
+
+            {/*<CurrencyInput*/}
+            {/*    value={w}*/}
+            {/*    hideSymbol*/}
+            {/*    onChangeValue={(event, originalValue) => {*/}
+
+            {/*        // Math.ceil(originalValue)*/}
+
+            {/*        console.log(Math.ceil(originalValue));*/}
+            {/*    }}*/}
+            {/*/>*/}
+
             <div className="grid-wrapper">
             <span className="bg chart">
                 <Line options={options} data={data}/>
@@ -264,10 +246,10 @@ function App() {
                 <span className="bg">
 
 <div style={{display: 'flex', alignItems: 'center'}}>
-          <img src={'./public/logo.jpg'} width={100} height="auto" alt="logo"/>
+          <img src={'./logo.jpg'} width={100} height="auto" alt="logo"/>
                 <h6>Планирование ипотеки</h6>
 </div>
-<a href="https://ru.myfin.by/" target="_blank">Кальк</a>
+<a href="https://ru.myfin.by/" target="_blank">Calc - link</a>
 
 
 
@@ -381,7 +363,7 @@ function App() {
             </span>
 
                 <span className="bg">
-<button className="button-reset" onClick={handlerResetCalcPercentFromSumIpoteka}> Сбросить расчет</button>
+            <button className="button-reset" onClick={handlerResetCalcPercentFromSumIpoteka}> Сбросить расчет</button>
                 <label>Сумма</label>
               <input className='input' type="number" value={stateBaseSum}
                      onInput={(event: any) => setStateBaseSum(event.target.value)}/>
@@ -395,27 +377,23 @@ function App() {
                 <p>Итого: {(stateBaseSum / 100) * statePercentFromSumFeatureIpoteki} руб.</p>----3
             </span>
                 <span className="bg ">
-<ul>
-    <li>15 числа оплата инертета дома и съем</li>
-<li>15 числа - ипотека оплата 26ка + 25ка</li>
-    <li>5 числа оплата сьемной квартиры - 65ка</li>
-    <li>5 числа 75ка - новая ипотека</li>
-    <li>20 числа 100ка - новая ипотека</li>
-</ul>
-
-                4
+                <CardPaymentsDates/>
+                    {/*4*/}
             </span>
                 <span className=" bg">
                  5
             </span>
                 <span className="big bg">
-                       <Calendar onChange={onChange} value={value}/> 6
+                    <h3 style={{textAlign: 'center'}}>Календарь</h3>
+                    <Calendar onChange={onChange} value={value}/>
+                    {/*6*/}
             </span>
-                <span className="bg big">
-                <Doughnut data={dataD}/>
-                    {result.toLocaleString('ru')} руб. 7
+                <div className="bg big">
+                    <h3 style={{textAlign: 'center'}}>График крупных расходов</h3>
+                    <ChartPaymentsCost/>
+                    {/*7*/}
 
-            </span>
+                </div>
                 <span className=" bg bg-9">
                 8
             </span>
@@ -441,8 +419,6 @@ function App() {
                     15
                 </a>
             </div>
-
-
         </>
     )
 }

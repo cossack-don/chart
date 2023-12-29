@@ -1,226 +1,265 @@
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-body{
-  background:#f0efec;
-  padding: 25px;
-  margin: 0 auto;
-  font-family: 'Rethink Sans', sans-serif;
+body {
+    background: #f0efec;
+    padding: 25px;
+    margin: 0 auto;
+    font-family: 'Rethink Sans', sans-serif;
 
 }
 
 h5 {
-  color: #ffa733;
+    color: #ffa733;
 }
 
 .button {
-  width: 35px;
-  height: 35px;
-  border: solid 1px #FFDC48;
-  border-radius: 5px;
-  color: #AB6800;
-  font-weight: bold;
-  background: #FFF9EB;
+    width: 35px;
+    height: 35px;
+    border: solid 1px #FFDC48;
+    border-radius: 5px;
+    color: #AB6800;
+    font-weight: bold;
+    background: #FFF9EB;
 }
 
 .button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  /* display: none; <- Crashes Chrome on hover */
-  -webkit-appearance: none;
-  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 .input {
-  color:#178D46;
-  background: #E9FBF0;
-  border:solid 1px #9AEFBC;
-  padding: 10px 10px;
-  border-radius: 5px;
+    color: #178D46;
+    background: #E9FBF0;
+    border: solid 1px #9AEFBC;
+    padding: 10px 10px;
+    border-radius: 5px;
 }
 
 
 .button-reset {
-  border:1px solid #FFBDC2;
-  background: #FFF0F1;
-  color:#94000D;
-  padding: 5px 10px;
-  border-radius: 5px;
+    border: 1px solid #FFBDC2;
+    background: #FFF0F1;
+    color: #94000D;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
-.button-reset:hover{
-  cursor: pointer;
+.button-reset:hover {
+    cursor: pointer;
 }
 
 table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+    background-color: #dddddd;
 }
-
-
-
-
 
 
 .header {
-  background: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  margin-bottom: 25px;
-  border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
 }
 
 .logo {
-  width: 160px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  background-image: url("assets/lime.svg");
-  background-size: contain;
-  background-position: right;
-  background-repeat: no-repeat;
-  text-decoration: none;
-  color: #ffffff;
+    width: 160px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    background-image: url("assets/lime.svg");
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .user {
-  width: 160px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  /*background-image: url("assets/user.svg");*/
-  background-size: contain;
-  background-position: right;
-  background-repeat: no-repeat;
-  text-decoration: none;
-  color: #ffffff;
-  fill: red;
-  position: relative;
-  z-index: 222;
+    width: 160px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    /*background-image: url("assets/user.svg");*/
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color: #ffffff;
+    fill: red;
+    position: relative;
+    z-index: 222;
 }
 
 .animation {
-  border: none;
-  position: relative;
-  z-index: 0;
+    border: none;
+    position: relative;
+    z-index: 0;
 }
 
 .animation:before {
-  content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  position: absolute;
-  top: -2px;
-  left:-4px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity .3s ease-in-out;
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -4px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
 }
 
 .animation:before {
-  opacity: 1;
+    opacity: 1;
 }
 
 .animation:after {
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
 }
 
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
 
 /*GRID CSS*/
 .grid-wrapper > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .grid-wrapper > div > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .grid-wrapper {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-auto-rows: 200px;
-  grid-auto-flow: dense;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 200px;
+    grid-auto-flow: dense;
 }
 
 .grid-wrapper .chart {
-  grid-row: span 3;
-  grid-column: span 4;
+    grid-row: span 3;
+    grid-column: span 4;
 }
 
 .grid-wrapper .wide {
-  grid-column: span 2;
+    grid-column: span 2;
 }
 
 .grid-wrapper .tall {
-  grid-row: span 2;
+    grid-row: span 2;
 }
 
 .grid-wrapper .big {
-  grid-column: span 2;
-  grid-row: span 2;
+    grid-column: span 2;
+    grid-row: span 2;
 }
 
 /* bg - items */
 .bg {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  display: inline-block;
-  background: #ffffff;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #000000;
-  padding: 15px;
-  transition: 0.5s;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    display: inline-block;
+    background: #ffffff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000000;
+    padding: 15px;
+    transition: 0.5s;
 }
 
 .bg:hover,
 .bg:focus {
-  transition: all 0.3s ease-in-out 0s;
-  box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
-  transform: translateY(-10px);
+    transition: all 0.3s ease-in-out 0s;
+    box-shadow: 0 0 60px rgba(0, 255, 203, 0.64);
+    transform: translateY(-10px);
 }
 
+/*/*/
+.badge-element {
+    background: #E9FBF0;
+    color: #178D46;
+    border-radius: 30px;
+    padding: 3px 8px;
+}
+
+/**/
+.small-text {
+    font-size: 10px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+/**/
+.react-calendar {
+    width: 100%;
+    margin-top: 25px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.react-calendar__tile--active {
+    background: #E9FBF0;
+    color: #178D46;
+    border-radius: 5px;
+}
+
+.react-calendar__tile:enabled:hover, .react-calendar__tile:enabled:focus {
+    background: #E9FBF0;
+    border-radius: 5px;
+}
