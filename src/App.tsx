@@ -62,7 +62,7 @@ function App() {
 
 
     for (let i = 0; stateOptionSelect > i; i++) {
-        featureFinance[i] = Number(currentFinance) + (summMunthZP * i)
+        featureFinance[i] = Number(currentFinance) + (Number(summMunthZP) * i)
     }
 
 
